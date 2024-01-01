@@ -18,4 +18,10 @@ class ProgrammeController extends Controller
             return view('programmes/programme_sonko');
         
     }
+
+    public function programme_macky(){
+        
+        return view('programmes/programme_macky');
+    
+}
 }

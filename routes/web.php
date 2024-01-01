@@ -13,6 +13,7 @@ use App\Http\Controllers\ProgrammeController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
+
 */
 
 Route::get('/', function () {
@@ -26,6 +27,8 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/programmes/programme', [ProgrammeController::class, 'index']);
     Route::get('/programmes/programme_sonko', [ProgrammeController::class, 'programme_sonko'])->name('liste_programme');
+    Route::get('/programmes/programme_macky', [ProgrammeController::class, 'programme_macky'])->name('affiche_programme');
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

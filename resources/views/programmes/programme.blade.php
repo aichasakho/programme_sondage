@@ -68,7 +68,7 @@
                             <tr>
                                 <td>Les programmes politiques de Macky Sall</td><br><br>
                                 <td>
-                                    <br><br><a href="{{ route('liste_programme')}}" class="btn btn-success">Voir plus</a>
+                                    <br><br><a href="{{ route('affiche_programme')}}" class="btn btn-success">Voir plus</a>
 
                                 </td>
                             </tr>
