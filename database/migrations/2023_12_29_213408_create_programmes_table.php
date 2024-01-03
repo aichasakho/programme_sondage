@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('programmes', function (Blueprint $table) {
             $table->id();
             $table->String('titre');
-            $table->text('contenu');
-            $table->String('document');
+            $table->text('description');
+            //$table->String('document');
             $table->timestamps();
         });
     }

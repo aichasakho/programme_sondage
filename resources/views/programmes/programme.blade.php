@@ -49,7 +49,8 @@
                     <table class="table" >
                         <thead>
                             <tr>
-                                <th>Titre</th>
+                                
+                                <th>Description</th>
                                 <th>Contenu</th>  
                             </tr>
                             
@@ -82,7 +83,48 @@
             </div>
         </div>
     </div>
-    
+   
+    <!--<a href="/ajouter" class=" btn btn-secondary ">Ajouter un etudiant</a>
+                    <hr>
+
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+
+                        </div>
+                    @endif
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Action</th>  
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @php 
+                                $ide = 1;
+                            @endphp
+
+                            @foreach($afficher as $apprenant) 
+                            <tr>
+                                <td>{{ $ide }}</td>
+                                <td>{{ $apprenant->prenom}}</td>
+                                <td>{{ $apprenant->nom}}</td>
+                                <td>
+                                    <a href="/modifier_apprenant/{{ $apprenant->id}}" class="btn btn-success">Modifier</a>
+                                    <a href="/supprimer_apprenant/{{ $apprenant->id}}" class="btn btn-danger">Supprimer</a>
+
+                                </td>
+                            </tr>
+                            @php 
+                                $ide += 1;
+                            @endphp
+                            @endforeach
+  -->
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

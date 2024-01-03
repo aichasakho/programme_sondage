@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\ProgrammeController;
 
 /*
@@ -16,9 +17,7 @@ use App\Http\Controllers\ProgrammeController;
 
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -26,10 +25,18 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/programmes/programme', [ProgrammeController::class, 'index']);
-    Route::get('/programmes/programme_sonko', [ProgrammeController::class, 'programme_sonko'])->name('liste_programme');
-    Route::get('/programmes/programme_macky', [ProgrammeController::class, 'programme_macky'])->name('affiche_programme');
+    Route::get('/programmes/programme_sonko', [ProgrammeController::class, 'affiche']);
 
+    Route::get('/candidats/candidat',[CandidatController::class,'index']);
+    Route::get('/modifier_candidat-candidats/{id}',[CandidatController::class,'modifier_candidat']);
+    Route::post('/modifier_candidat/traitement',[CandidatController::class,'modifier_candidat_traitement']);
+    Route::get('/candidats/ajouter_candidat',[CandidatController::class,'ajout_candidat']);
+    Route::post('/ajouter_candidat/traitement',[CandidatController::class,'ajout_candidat_traitement']);
 
+    Route::get('/supprimer_candidat-candidats/{id}',[CandidatController::class,'supprimer_candidat'])->name('supprimerCandidat');
+
+    Route::get('/programmes/ajouter_programme',[ProgrammeController::class,'ajout_programme']);
+    Route::post('/programmes/ajouter_programe/',[ProgrammeController::class,'store']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -37,3 +44,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+/* 
+
+
+*/
+
