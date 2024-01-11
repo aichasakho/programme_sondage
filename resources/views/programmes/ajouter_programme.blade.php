@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LISTES DES PROGRAMMES</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  </head>
+  <style>
+   tr,td,label input{
+        width: 100%;
+    }
+    
+  </style>
+</head>
   <body>
     <div class="container ">
         <div class="row">
@@ -27,33 +33,50 @@
                     @endforeach
 
                 </ul>
-                <form Action="/programmes/ajouter_programme/" method="POST" class="form-group">
+                <form Action="{{ route('enregistrerProgramme')}}" method="POST" class="form-group">
                     @csrf
                     <table> 
+                            
                             <tr>
-                                <th>Titre</th><br>
-                                <th>Description</th><br>
-                                
+                                <td>
+                                <label for="prenom" class="form-label">Prénom du Candidat :</label>
+                                   <input type="text" class="form-control" id="prenom" name="prenom" required>
+                                </td> <br>
                             </tr>
                             <tr> 
+                                <td>
+                                   <label for="nom" class="form-label">Nom du Candidat :</label>
+                                   <input type="text" class="form-control" id="nom" name="nom" required>
+
+                                </td><br>
+                            </tr>
+                            <tr> 
+                                <td>
+                                   <label for="parti" class="form-label">Parti :</label>
+                                   <input type="text" class="form-control" id="parti" name="parti" required>
+
+                                </td><br>
+                            </tr>    
+                            <tr>
                                 <td> 
-                                <label for="Titre" class="form-label"></label>
-                                <input type="text" class="form-control" id="Titre" name="titre">
+                                <label for="titre" class="form-label">Titre :</label>
+                                <input type="text" class="form-control " id="titre" name="titre">
                                 </td><br><br><br>
-
+                            </tr>
+                            <tr> 
                                 <td> 
-                                <label for="Description" class="form-label"></label>
-                                <input type="text" class="form-control" id="Description" name="description">
-                                </td>
+                                <label for="description" class="form-label">Description :</label>
+                                <textarea rows="10" cols="30" class="form-control" id="description" name="description" required></textarea>
+                                </td><br>
 
                             </tr>
                             <tr> 
                                 <td> 
-                                <button type="submit" class="btn btn-secondary">AJOUTER UN PROGRAMME</button><br>
-                                <a href="{{ route('liste_programme')}}" class="btn btn-danger">Revenir à la liste des programmes de Sonko</a>
-                                <a href="{{ route('affiche_programme')}}" class="btn btn-danger">Revenir à la liste des programmes de Macky Sall</a>    
-                                </td>
+                                <button type="submit" value="Ajouter un programme" class="btn btn-secondary">AJOUTER UN PROGRAMME</button><br><br>
+                                <a href="{{ route('programmes',['candidat_id' => 1]) }}" class="btn btn-danger">Revenir à la liste des programmes de Sonko</a><br><br>
+                                <a href="{{ route('programmes',['candidat_id' => 2]) }}" class="btn btn-danger">Revenir à la liste des programmes de Macky</a><br><br>
 
+                                </td>
                             </tr>
                     </table> 
                 </form>
@@ -71,26 +94,7 @@
   </body>
 </html>
 
-<!--
-     <form Action="/ajouter/traitement" method="POST" class="form-group">
-                    @csrf
-                        <div class="form-group">
-                            <label for="Prénom" class="form-label">Prénom</label>
-                            <input type="text" class="form-control" id="Prénom" name="prenom">
-                        </div>
 
-                        <div class="form-group">
-                            <label for="Nom" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="Nom" name="nom">
-                        </div>
-                        <br>
-
-                        <button type="submit" class="btn btn-secondary">AJOUTER UN ETUDIANT</button>
-                    <br> <br>
-                    <a href="/apprenants" class="btn btn-danger">Revenir à la liste des apprenants</a>    
-                    </form>
-                    <hr>
- -->
 
 
 

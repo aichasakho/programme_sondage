@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidat;
+use App\Models\Programme;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CandidatController;
 
@@ -11,8 +12,8 @@ class CandidatController extends Controller
 {
      public function index()
     {
-        $affiche = Candidat::all();
-        return view('candidats.candidat',compact('affiche'));
+        $candidats = Candidat::all();
+        return view('candidats.candidat',compact('candidats'));
     }
     public function ajout_candidat()
     {
@@ -33,7 +34,7 @@ class CandidatController extends Controller
         $candidat->parti = $request->parti;
         $candidat->save();
     
-        return redirect('candidats/ajouter_candidat')->with('status','Le candidat a été ajouté avec succès.');
+        return redirect('candidats/ajout_candidat')->with('status','Le candidat a été ajouté avec succès.');
     
     }
     public function modifier_candidat($id) {
@@ -41,6 +42,10 @@ class CandidatController extends Controller
     
         return view('candidats.modifier_candidat',compact('change'));
     }
+
+    
+    
+   
     
     public function modifier_candidat_traitement(Request $request){
         $request->validate([

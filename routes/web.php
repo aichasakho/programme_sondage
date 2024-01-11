@@ -25,18 +25,20 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/programmes/programme', [ProgrammeController::class, 'index']);
-    Route::get('/programmes/programme_sonko', [ProgrammeController::class, 'affiche']);
+    Route::get('/programmes/ajouter_programme', [ProgrammeController::class, 'ajoutProgramme']);
+    Route::post('/programmes', [ProgrammeController::class, 'enregistrerProgramme'])->name('enregistrerProgramme');
+    Route::get('/programmes/{candidat_id}', [ProgrammeController::class, 'afficherProgrammeCandidat'])->name('programmes');
+
+  
 
     Route::get('/candidats/candidat',[CandidatController::class,'index']);
     Route::get('/modifier_candidat-candidats/{id}',[CandidatController::class,'modifier_candidat']);
     Route::post('/modifier_candidat/traitement',[CandidatController::class,'modifier_candidat_traitement']);
-    Route::get('/candidats/ajouter_candidat',[CandidatController::class,'ajout_candidat']);
-    Route::post('/ajouter_candidat/traitement',[CandidatController::class,'ajout_candidat_traitement']);
-
+    Route::get('/candidats/ajout_candidat',[CandidatController::class,'ajout_candidat']);
+    Route::post('/ajout_candidat/traitement',[CandidatController::class,'ajout_candidat_traitement']);
     Route::get('/supprimer_candidat-candidats/{id}',[CandidatController::class,'supprimer_candidat'])->name('supprimerCandidat');
 
-    Route::get('/programmes/ajouter_programme',[ProgrammeController::class,'ajout_programme']);
-    Route::post('/programmes/ajouter_programe/',[ProgrammeController::class,'store']);
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

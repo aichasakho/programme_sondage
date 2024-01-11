@@ -4,10 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LISTES DES CANDIDATS</title>
-    <link href="https://cdn.jsde<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="ulivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
     table {
       border-collapse: collapse; /* Fusionner les bordures adjacentes */
@@ -46,7 +43,7 @@
                 
                 <h1><marquee>LISTES DES CANDIDATS</marquee></h1>
                 <hr>
-                    <a href="/candidats/ajouter_candidat" class="btn btn-primary" >Ajouter un candidat</a>
+                    <a href="/candidats/ajout_candidat" class="btn btn-primary" >Ajouter un candidat</a>
                     <hr>
 
                     @if (session('status'))
@@ -77,7 +74,7 @@
                                 $ide = 1;
                             @endphp
 
-                            @foreach($affiche as $candidat) 
+                            @foreach($candidats as $candidat) 
                             <tr>
                                 <td>{{ $ide }}</td>
                                 <td>{{ $candidat->prenom}}</td>
@@ -88,8 +85,12 @@
                                 <td>
                                     <a href="/modifier_candidat-candidats/{{ $candidat->id}}" class="btn btn-info" >Modifier</a>
                                     <a href="/supprimer_candidat-candidats/{{ $candidat->id}}"class="btn btn-danger">Supprimer</a>
+                                    <a href="/programmes/programme" class="btn btn-success">Voir programmes</a>
 
                                 </td>
+                                
+
+                            
 
                                 
                             </tr>

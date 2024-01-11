@@ -3,12 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Programmes Politiques pour une Élection</title>
-    <link href="https://cdn.jsde<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="ulivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style>
+    <title>PROGRAMMES</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
     table {
       border-collapse: collapse; /* Fusionner les bordures adjacentes */
       width: 100%; /* Ajuster la largeur du tableau à 100% de son conteneur */
@@ -43,8 +40,8 @@
                 
                 <h1><marquee>Programmes Politiques pour une Élection</marquee></h1>
                 <hr>
-
-                   
+                  <a href="/programmes/ajouter_programme" class="btn btn-primary" >Ajouter un programe</a>
+                  <hr>
 
                     <table class="table" >
                         <thead>
@@ -57,22 +54,21 @@
                         </thead>
                     
                         <tbody>
-                            <tr>
-                                <td>Les programmes politiques de Ousmane Sonko</td><br><br>
-                                <td>
-                                    <br><br><a href="{{ route('liste_programme')}}" class="btn btn-success">Voir plus</a>
-
-                                </td>
-                            </tr>
+                        <tr>
+                              <td>Les programmes politiques de Ousmane Sonko</td>
+                              <td>
+                                  <a href="{{ route('programmes',['candidat_id' => 1]) }}" class="btn btn-success">Voir en détails</a>
+                              </td>
+                        </tr>
                             
 
-                            <tr>
-                                <td>Les programmes politiques de Macky Sall</td><br><br>
-                                <td>
-                                    <br><br><a href="{{ route('affiche_programme')}}" class="btn btn-success">Voir plus</a>
+                        <tr>
+                              <td>Les programmes politiques de Macky Sall</td>
+                              <td>
+                                  <a href="{{ route('programmes',['candidat_id' => 2]) }}" class="btn btn-success">Voir en détails</a>
 
-                                </td>
-                            </tr>
+                              </td>
+                        </tr>
                             
                         </tbody>
 
@@ -84,47 +80,7 @@
         </div>
     </div>
    
-    <!--<a href="/ajouter" class=" btn btn-secondary ">Ajouter un etudiant</a>
-                    <hr>
-
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-
-                        </div>
-                    @endif
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Action</th>  
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @php 
-                                $ide = 1;
-                            @endphp
-
-                            @foreach($afficher as $apprenant) 
-                            <tr>
-                                <td>{{ $ide }}</td>
-                                <td>{{ $apprenant->prenom}}</td>
-                                <td>{{ $apprenant->nom}}</td>
-                                <td>
-                                    <a href="/modifier_apprenant/{{ $apprenant->id}}" class="btn btn-success">Modifier</a>
-                                    <a href="/supprimer_apprenant/{{ $apprenant->id}}" class="btn btn-danger">Supprimer</a>
-
-                                </td>
-                            </tr>
-                            @php 
-                                $ide += 1;
-                            @endphp
-                            @endforeach
-  -->
+   
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

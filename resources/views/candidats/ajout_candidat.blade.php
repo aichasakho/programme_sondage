@@ -27,7 +27,7 @@
                     @endforeach
 
                 </ul>
-                <form Action="/ajouter_candidat/traitement" method="POST" class="form-group">
+                <form Action="/ajout_candidat/traitement" method="POST" class="form-group">
                 @csrf
                         <div class="form-group">
                             <label for="Prénom" class="form-label">Prénom</label>
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label for="Parti" class="form-label">Parti</label>
                             <input type="text" class="form-control" id="Parti" name="parti">
-                        </div>
+                        </div><br>
 
                         
 
