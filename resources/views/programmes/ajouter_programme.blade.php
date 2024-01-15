@@ -58,9 +58,7 @@
                         </div><br>
                             <tr> 
                                 <td> 
-                                <button type="submit" value="Ajouter un programme" class="btn btn-secondary">AJOUTER UN PROGRAMME</button><br><br>
-                                <a href="{{ route('programmes',['candidat_id' => $candidat->id]) }}" class="btn btn-success">Voir les programmes</a>
-
+                                    <button type="submit" value="Ajouter un programme" class="btn btn-secondary">AJOUTER UN PROGRAMME</button><br><br>
                                 </td>
                             </tr>
                     </table> 

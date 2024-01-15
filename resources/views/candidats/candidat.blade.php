@@ -9,9 +9,11 @@
                 <div class="card-header d-flex justify-content-between ">
                     <h5 class="mb-0">Liste des candidats</h5>
                     @if(Auth::user()->role=='admin')
-                        <a href="/candidats/ajout_candidat" class="btn btn-primary" >Ajouter un candidat</a>
-                    @endif
+                        <a href="/candidats/ajout_candidat" class="btn btn-secondary" >Ajouter un candidat</a>
                     
+                        <a href="/programmes/ajouter_programme" class="btn btn-secondary" >Ajouter un programe</a>
+                     @endif  
+                                    
                     <hr>
 
                     @if (session('status'))
@@ -61,8 +63,8 @@
                                 </a>
                                         <div class="dropdown-menu dropdown-menu-end" style="">
                                     @if(Auth::user()->role=='admin') 
-                                            <a href="/modifier_candidat-candidats/{{ $candidat->id}}" class="text-white btn btn-danger ml-2 pt-2"><i class="fa fa-trash"></i>>Modifier</a>
-                                            <a href="/supprimer_candidat-candidats/{{ $candidat->id}}" class="text-white btn btn-success ml-2 pt-2" ><i class="fa-sharp fa-solid fa-pen-to-square"></i>>Supprimer</a>
+                                            <a href="/modifier_candidat-candidats/{{ $candidat->id}}" class="text-white btn btn-success ml-2 pt-2"><i class="fa-sharp fa-solid fa-pen-to-square"></i>Modifier</a>
+                                            <a href="/supprimer_candidat-candidats/{{ $candidat->id}}" class="text-white btn btn-danger ml-2 pt-2" ><i class="fa fa-trash"></i>Supprimer</a>
                                     @endif       
                                             <a href="{{ route('programmes',['candidat_id' => $candidat->id]) }}" class="text-white btn btn-warning ml-2 pt-2"><i class="fa fa-eye"></i>Voir en programmes</a>
 

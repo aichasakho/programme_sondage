@@ -80,8 +80,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/programmes/programme">Liste des programmes</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="{{ route('login') }}">Retour </a></li>
+                        <li><a class="dropdown-item" href="#"></a></li>
                     </ul>
                     </li>
                 </ul>

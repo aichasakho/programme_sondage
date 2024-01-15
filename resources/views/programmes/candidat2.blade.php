@@ -43,27 +43,27 @@
                       <tr>
                           <td>{{ $programme->secteur }}</td>
                           <td>{{ $programme->description }}</td>
-                          <td><a href="{{asset('/storage/'.$programme->document)}}">Voir document</a></td>
+                          <td><a href="{{asset('/storage/'.$programme->document)}}" class="btn btn-secondary">Voir document</a></td>
 
                     
                       
-                        <td>
+                          <td>
                             <button type='button' class="likeButton" data-programmeid="{{ $programme->id }}" onclick="handleLikeAjax({{ $programme->id }})">
                             <i class="fas fa-thumbs-up"></i></button>
                             <p class="likeCount">{{$programme->likes_count ?? "0"}}</p>
                             <button type='button' class="dislikeButton" data-programmeid="{{ $programme->id }}" onclick="handleDislikeAjax({{ $programme->id }})">
                             <i class="fas fa-thumbs-down"></i></button>
                             <p class="dislikeCount">{{$programme->dislikes_count ?? "0"}}</p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
+                          </td>
+                      
+                      
+                          <td>
                             @if(Auth::user()->role=='admin')
-                               <a href="/modifier_programme-programmes/{{ $programme->id}}" class="btn btn-info" >Modifier</a>
-                               <a href="/supprimer_programme-programmes/{{ $programme->id}}"class="btn btn-danger">Supprimer</a>
+                               <a href="/modifier_programme-programmes/{{ $programme->id}}" class="text-white btn btn-success ml-2 pt-2" ><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+                               <a href="/supprimer_programme-programmes/{{ $programme->id}}"class="text-white btn btn-danger ml-2 pt-2"><i class="fa fa-trash"></i></a>
                             @endif
-                        </td>
-                      </tr>
+                          </td>
+                        </tr>
                       
                       @php 
                         $ide += 1;

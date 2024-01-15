@@ -43,7 +43,7 @@
                       <tr>
                           <td>{{ $programme->secteur }}</td>
                           <td>{{ $programme->description }}</td>
-                          <td><a href="{{asset('/storage/'.$programme->document)}}">Voir document</a></td>
+                          <td><a href="{{asset('/storage/'.$programme->document)}}" class="btn btn-secondary">Voir document</a></td>
 
                     
                       

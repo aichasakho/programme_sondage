@@ -13,15 +13,15 @@ document.addEventListener('DOMContentLoaded', function (mode) {
                 {
                     label: 'Likes',
                     data: [],
-                    backgroundColor: 'rgba(112,178,245,0.75)',
-                    borderColor: 'rgb(2,22,98)',
+                    backgroundColor: 'rgb(219,112,147)',
+                    borderColor: 'rgb(219,112,147)',
                     borderWidth: 1
                 },
                 {
                     label: 'Dislikes',
                     data: [],
-                    backgroundColor: 'rgba(238,103,103,0.62)',
-                    borderColor: 'rgba(213,0,0,0.81)',
+                    backgroundColor: 'rgba(60, 59, 60, 0.31)',
+                    borderColor: 'rgba(60, 59, 60, 0.31)',
                     borderWidth: 1
                 }
             ]

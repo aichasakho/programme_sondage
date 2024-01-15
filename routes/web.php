@@ -41,18 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/modifier_programme/traitement',[ProgrammeController::class,'modifier_programme_traitement']);
     Route::get('/supprimer_programme-programmes/{id}',[ProgrammeController::class,'supprimer_programme']);
 
-
-
-  
-
-
     Route::post('/programmes/{programme_id}/like', [LikeController::class, 'like']);
     Route::post('/programmes/{programme_id}/dislike', [LikeController::class, 'dislike']);
 
-
-
-
-    
     Route::get('/candidats/candidat',[CandidatController::class,'index']);
     Route::get('/modifier_candidat-candidats/{id}',[CandidatController::class,'modifier_candidat']);
     Route::post('/modifier_candidat/traitement',[CandidatController::class,'modifier_candidat_traitement']);
