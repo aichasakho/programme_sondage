@@ -1,49 +1,17 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LISTES DES CANDIDATS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style>
-    table {
-      border-collapse: collapse; /* Fusionner les bordures adjacentes */
-      width: 75%; /* Ajuster la largeur du tableau à 100% de son conteneur */
-    }
-   
-    th, td {
-      border: 1px solid black; /* Ajouter une bordure de 1 pixel solide */
-      padding: 8px; /* Ajouter un espace de remplissage autour du contenu */
-      text-align: left; /* Aligner le texte à gauche */
-      font-size: 25px;
-      
-    }
-    th{
-        border: 2px solid black;
-    }
-    
-   
-    
-    td, button, a{ 
-        font-size:20px;
+@php use Illuminate\Support\Facades\Auth; @endphp
 
-
-    }
-    
-    
-    
-    
-  </style>
-
-</head>
-  <body>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col s12">
-                
-                <h1><marquee>LISTES DES CANDIDATS</marquee></h1>
-                <hr>
-                    <a href="/candidats/ajout_candidat" class="btn btn-primary" >Ajouter un candidat</a>
+  @extends('layouts.base')
+    @section('content')
+    <div class="container">
+    <div class="row">
+        <div class="col-12 mb-3 mb-lg-5">
+            <div class="overflow-hidden card table-nowrap table-card">
+                <div class="card-header d-flex justify-content-between ">
+                    <h5 class="mb-0">Liste des candidats</h5>
+                    @if(Auth::user()->role=='admin')
+                        <a href="/candidats/ajout_candidat" class="btn btn-primary" >Ajouter un candidat</a>
+                    @endif
+                    
                     <hr>
 
                     @if (session('status'))
@@ -52,69 +20,81 @@
 
                         </div>
                     @endif
-               
-                    <table class="table">
-                        <thead>
+                </div>
+                <div class="table-responsive">
+                    <table class="table mb-3">
+                        <thead class="small text-uppercase bg-body text-muted">
                             <tr>
                                 <th>#</th>
-                                <th>Prénom</th>
-                                <th>Nom</th>
+                                <th>Candidat</th>
                                 <th>Parti</th>
+                                <th>Biographie</th>
+                                <th>Validation</th>
                                 <th>Action</th>
-
-                               <!-- <th>Validation</th>
-                                <th>Photo</th>-->
-
-
                             </tr>
                         </thead>
                         <tbody>
-
+                            
                             @php 
                                 $ide = 1;
                             @endphp
 
                             @foreach($candidats as $candidat) 
-                            <tr>
-                                <td>{{ $ide }}</td>
-                                <td>{{ $candidat->prenom}}</td>
-                                <td>{{ $candidat->nom}}</td>
-                                <td>{{ $candidat->parti}}</td>
-                                <!--<td>{{ $candidat->validation}}</td>
-                                <td>{{ $candidat->photo}}</td>-->
-                                <td>
-                                    <a href="/modifier_candidat-candidats/{{ $candidat->id}}" class="btn btn-info" >Modifier</a>
-                                    <a href="/supprimer_candidat-candidats/{{ $candidat->id}}"class="btn btn-danger">Supprimer</a>
-                                    <a href="/programmes/programme" class="btn btn-success">Voir programmes</a>
-
-                                </td>
-                                
-
                             
+                            <tr class="align-middle">
+                                <td>{{ $ide }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src='{{asset("/storage/$candidat->photo")}}' class="avatar sm rounded-pill me-3 flex-shrink-0" alt="">
+                                        <div>
+                                            <div class="h6 mb-0 lh-1">{{ $candidat->prenom}} {{ $candidat->nom}} </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ $candidat->parti}}</td>
+                                <td class="height-200px">{{ $candidat->biographie}}</td>
+                                <td>{{ $candidat->validation ==1?'valide':'invalide'}}</td>
+                                <td class="text-end">
+                                    <div class="drodown">
+                                        <a data-bs-toggle="dropdown" href="#" class="btn p-1" aria-expanded="false">
+                                  <i class="fa fa-bars" aria-hidden="true"></i>
+                                </a>
+                                        <div class="dropdown-menu dropdown-menu-end" style="">
+                                    @if(Auth::user()->role=='admin') 
+                                            <a href="/modifier_candidat-candidats/{{ $candidat->id}}" class="text-white btn btn-danger ml-2 pt-2"><i class="fa fa-trash"></i>>Modifier</a>
+                                            <a href="/supprimer_candidat-candidats/{{ $candidat->id}}" class="text-white btn btn-success ml-2 pt-2" ><i class="fa-sharp fa-solid fa-pen-to-square"></i>>Supprimer</a>
+                                    @endif       
+                                            <a href="{{ route('programmes',['candidat_id' => $candidat->id]) }}" class="text-white btn btn-warning ml-2 pt-2"><i class="fa fa-eye"></i>Voir en programmes</a>
 
-                                
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             @php 
                                 $ide += 1;
                             @endphp
                             @endforeach
                         </tbody>
-
-
                     </table>
-                
-            
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+
+
     
     
+    @endsection   
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
-</html>
+    
 
 
+
+
+
+    
 
 
 

@@ -1,12 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LISTES DES CANDIDATS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  </head>
-  <body>
+@extends('layouts.base')
+    @section('content')
     <div class="container ">
         <div class="row">
             <div class="col s12">
@@ -26,7 +19,7 @@
                     @endforeach
 
                 </ul>
-                <form Action="/modifier_candidat/traitement" method="POST" class="form-group">
+                <form Action="/modifier_candidat/traitement" method="POST" class="form-group" enctype="multipart/form-data">
                         @csrf
 
                         <input type="text" name="id" style="diplay: none;" value="{{$change->id}}">
@@ -42,9 +35,26 @@
 
                         <div class="form-group">
                             <label for="Parti" class="form-label">Parti</label>
-                            <input type="text" class="form-control" id="Parti" name="parti" value="{{ $change->nom }}">
+                            <input type="text" class="form-control" id="Parti" name="parti" value="{{ $change->parti }}">
                         </div>
+
+                        <div class="form-group">
+                            <label for="biographie" class="form-label">biographie</label>
+                            <input type="text" class="form-control" id="biographie" name="biographie"  value="{{ $change->biographie }}">
+                        </div><br>
                         <br>
+
+                        <div class="form-check mb-2" >
+                            <input class="form-check-input" type="checkbox" value="on" id="validation"  name="validation"  value="{{ $change->validation }}" checked >
+                            <label class="form-check-label" for="validation">
+                            Validation
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photo" class="form-label">Photo</label>
+                            <input type="file" class="form-control" id="photo" name="photo"  value="{{ $change->photo }}">
+                        </div><br>
 
                         <button type="submit" class="btn btn-secondary">MODIFIER UN CANDIDAT</button>
                     <br> <br>
@@ -59,10 +69,7 @@
     </div>
     
     
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
-</html>
+    @endsection 
 
 
 

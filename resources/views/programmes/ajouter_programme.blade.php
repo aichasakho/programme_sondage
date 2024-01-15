@@ -1,18 +1,6 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LISTES DES PROGRAMMES</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <style>
-   tr,td,label input{
-        width: 100%;
-    }
-    
-  </style>
-</head>
-  <body>
+@extends('layouts.base')
+    @section('content')
+  
     <div class="container ">
         <div class="row">
             <div class="col s12">
@@ -33,34 +21,25 @@
                     @endforeach
 
                 </ul>
-                <form Action="{{ route('enregistrerProgramme')}}" method="POST" class="form-group">
+                <form Action="{{ route('enregistrerProgramme')}}" method="POST" class="form-group" enctype="multipart/form-data">
                     @csrf
                     <table> 
                             
                             <tr>
                                 <td>
-                                <label for="prenom" class="form-label">Prénom du Candidat :</label>
-                                   <input type="text" class="form-control" id="prenom" name="prenom" required>
-                                </td> <br>
+                                    <label for="candidat_id" class="form-label">Candidat : </label>
+                                    <select name="candidat_id" class="form-control " id="candidat_id">
+                                        <option value="" disabled selected>Selectionner un candidat</option>
+                                        @foreach($candidats as $candidat)
+                                        <option value="{{$candidat->id}}">{{$candidat->prenom}} {{$candidat->nom}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
                             </tr>
-                            <tr> 
-                                <td>
-                                   <label for="nom" class="form-label">Nom du Candidat :</label>
-                                   <input type="text" class="form-control" id="nom" name="nom" required>
-
-                                </td><br>
-                            </tr>
-                            <tr> 
-                                <td>
-                                   <label for="parti" class="form-label">Parti :</label>
-                                   <input type="text" class="form-control" id="parti" name="parti" required>
-
-                                </td><br>
-                            </tr>    
                             <tr>
                                 <td> 
-                                <label for="titre" class="form-label">Titre :</label>
-                                <input type="text" class="form-control " id="titre" name="titre">
+                                <label for="secteur" class="form-label">Secteur :</label>
+                                <input type="text" class="form-control " id="secteur" name="secteur" required>
                                 </td><br><br><br>
                             </tr>
                             <tr> 
@@ -70,11 +49,17 @@
                                 </td><br>
 
                             </tr>
+                            <tr>
+                                <td>
+                                <label for="document" class="form-label">Document</label>
+                                <input type="file" class="form-control" id="document" name="document">
+                                </td>
+                            </tr>
+                        </div><br>
                             <tr> 
                                 <td> 
                                 <button type="submit" value="Ajouter un programme" class="btn btn-secondary">AJOUTER UN PROGRAMME</button><br><br>
-                                <a href="{{ route('programmes',['candidat_id' => 1]) }}" class="btn btn-danger">Revenir à la liste des programmes de Sonko</a><br><br>
-                                <a href="{{ route('programmes',['candidat_id' => 2]) }}" class="btn btn-danger">Revenir à la liste des programmes de Macky</a><br><br>
+                                <a href="{{ route('programmes',['candidat_id' => $candidat->id]) }}" class="btn btn-success">Voir les programmes</a>
 
                                 </td>
                             </tr>
@@ -90,9 +75,7 @@
     
     
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
-</html>
+    @endsection 
 
 
 

@@ -20,32 +20,91 @@ class ProgrammeController extends Controller
 
         return view('programmes.candidat1')->with('candidat', $candidat);
     }
+
     public function ajoutProgramme()
     {
-        return view('programmes.ajouter_programme');
+        $candidats = Candidat::all();
+        return view('programmes.ajouter_programme',compact('candidats'));
+    }
+    
+
+    public function programmeSondage()
+    {
+        return view('programmes.sondage');
     }
 
     public function enregistrerProgramme(Request $request)
     {
         $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
+            'candidat_id' =>'required',
             'description' => 'required',
-            'parti' => 'required',
-        ]);
+            'secteur' => 'required',
+            'document' => ['required','extensions:pdf,docx'],
 
-        $candidat = Candidat::firstOrCreate([
-            'nom' => $request->input('nom'),
-            'prenom' => $request->input('prenom'),
         ]);
+        $document=$request->document;
+        $document=$document->store('document','public');
+       
 
         $programme = new Programme();
+        $programme->secteur = $request->input('secteur');
+        $programme->candidat_id = $request->input('candidat_id');
         $programme->description = $request->input('description');
-        $programme->titre = $request->input('titre');
+        $programme->document = $document;
 
+        $candidat= Candidat::find($request->input('candidat_id'));
         $candidat->programmes()->save($programme);
 
         return redirect('/programmes/ajouter_programme')->with('status', 'Le programme a été ajouté avec succès.');
     }
+
+
+    public function modifier_programme($id) {
+        $change = Programme::find($id);
+        $candidats = Candidat::all();
+        
+        return view('programmes.modifier_programme',compact('change', 'candidats'));
+    }
+
+    
+    
+   
+    
+    public function modifier_programme_traitement(Request $request){
+        $request->validate([
+            'candidat_id' =>'required',
+            'description' => 'required',
+            'secteur' => 'required',
+            'document' => ['required','extensions:pdf,docx'],
+
+
+
+        ]);
+        $document=$request->document;
+        $document=$document->store('document','public');
+    
+            
+        $programme = new Programme();
+        $programme->secteur = $request->input('secteur');
+        $programme->candidat_id = $request->input('candidat_id');
+        $programme->description = $request->input('description');
+        $programme->document = $document;
+
+
+
+        $programme->update();
+
+        return redirect('/programmes/programme')->with('status','Le programme a été modifié avec succès.');
+    
+    }
+    public function supprimer_programme($id){
+        $programme = Programme::find($id);
+        $programme-> delete();
+            
+        return redirect('/programmes/programme')->with('status','Le programme a bien été supprimé.');
+    }
+    
+    
+    
 }
 

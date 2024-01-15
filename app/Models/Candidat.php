@@ -14,6 +14,11 @@ class Candidat extends Model
         'nom',
         'prenom',
         'parti',
+        'biographie',
+        'validation',
+        'photo',
+
+
 
     ];
 

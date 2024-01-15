@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('nom');
             $table->string('parti');
+            $table->text('biographie');
+            $table->string('photo');
+            $table->boolean('validation');
+
+
            
             $table->timestamps();
         });

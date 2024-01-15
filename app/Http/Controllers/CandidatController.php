@@ -25,18 +25,37 @@ class CandidatController extends Controller
             'nom' =>'required',
             'prenom' =>'required',
             'parti' =>'required',
+            'photo' =>'required|image',
+            'validation' =>'required',
+            'biographie' =>'required',
+
+
 
         ]);
-    
+
+        $photo = $request->photo;
+        $photo= $photo->store('images','public');
+        
+         
+
+
         $candidat = new Candidat();
+        $candidat->validation =($request->validation=='on')? 1:0;
         $candidat->nom = $request->nom;
         $candidat->prenom = $request->prenom;
         $candidat->parti = $request->parti;
+        $candidat->biographie = $request->biographie;
+        $candidat->photo = $photo ;
+
+
+
         $candidat->save();
     
         return redirect('candidats/ajout_candidat')->with('status','Le candidat a été ajouté avec succès.');
     
     }
+
+
     public function modifier_candidat($id) {
         $change = Candidat::find($id);
     
@@ -52,14 +71,27 @@ class CandidatController extends Controller
             'nom' =>'required',
             'prenom' =>'required',
             'parti' =>'required',
+            'photo' =>'required|image',
+            'biographie' =>'required',
+            'validation' =>'required',
+
+
 
         ]);
+        $photo = $request->photo;
+        $photo= $photo->store('images','public');
     
             
         $candidat = Candidat::find($request->id);
+        $candidat->validation =($request->validation=='on')? 1:0;
         $candidat->nom = $request->nom;
         $candidat->prenom = $request->prenom;
         $candidat->parti = $request->parti;
+        $candidat->biographie = $request->biographie;
+        $candidat->photo = $photo ;
+
+
+
         $candidat->update();
     
         return redirect('/candidats/candidat')->with('status','Le candidat a été modifié avec succès.');

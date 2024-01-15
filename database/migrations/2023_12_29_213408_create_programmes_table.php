@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('programmes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('candidat_id');
-            $table->String('titre');
+            $table->String('secteur');
             $table->text('description');
+            $table->String('document');
             $table->foreign('candidat_id')->references('id')->on('candidats');
             $table->timestamps();
         });

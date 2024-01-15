@@ -1,34 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Programmes Politiques pour une Élection</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style>
-      h1 {
-        text-align: center;
-      }
-      body {
-        background-color: #F5F5DC;
-      }
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-    
-      th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-      }
-      .active {
-        background-color: #ccc;
-      }
-    </style>
-  </head>
-  <body>
+@extends('layouts.base')
+    @section('content')
     <div class="container text-center">
         <div class="row">
             <div class="col s12">
@@ -40,6 +11,7 @@
                 @endif
 
                 <h3>JOTNA : Programme de politique économique et sociale Patriotisme – Souveraineté – Bonne Gouvernance – Justice sociale – Sécurité</h3>
+                
                 <hr>
               
                 @if (session('status'))
@@ -52,9 +24,12 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Titre</th>
+                      <th>Secteur</th>
                       <th>Description</th>
-                      <th>Sondage</th>  
+                      <th>Document</th>
+                      <th>Sondage</th>
+                      <th>Action</th>  
+
                     </tr>
                   </thead>
                   <tbody>
@@ -66,17 +41,29 @@
                       @foreach ($candidat->programmes as $programme)
                    
                       <tr>
-                          <td>{{ $programme->titre }}</td>
+                          <td>{{ $programme->secteur }}</td>
                           <td>{{ $programme->description }}</td>
+                          <td><a href="{{asset('/storage/'.$programme->document)}}">Voir document</a></td>
+
                     
                       
-                        <td>
-                          <button class="likeButton" onclick="handleLike(this)"><i class="fas fa-thumbs-up"></i></button>
-                          <p class="likeCount">0</p>
-                          <button class="dislikeButton" onclick="handleDislike(this)"><i class="fas fa-thumbs-down"></i></button>
-                          <p class="dislikeCount">0</p>
-                        </td>
-                      </tr>
+                          <td>
+                            <button type='button' class="likeButton" data-programmeid="{{ $programme->id }}" onclick="handleLikeAjax({{ $programme->id }})">
+                            <i class="fas fa-thumbs-up"></i></button>
+                            <p class="likeCount">{{$programme->likes_count ?? "0"}}</p>
+                            <button type='button' class="dislikeButton" data-programmeid="{{ $programme->id }}" onclick="handleDislikeAjax({{ $programme->id }})">
+                            <i class="fas fa-thumbs-down"></i></button>
+                            <p class="dislikeCount">{{$programme->dislikes_count ?? "0"}}</p>
+                          </td>
+                      
+                      
+                          <td>
+                            @if(Auth::user()->role=='admin')
+                               <a href="/modifier_programme-programmes/{{ $programme->id}}" class="text-white btn btn-success ml-2 pt-2" ><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+                               <a href="/supprimer_programme-programmes/{{ $programme->id}}"class="text-white btn btn-danger ml-2 pt-2"><i class="fa fa-trash"></i></a>
+                            @endif
+                          </td>
+                        </tr>
                       
                       @php 
                         $ide += 1;
@@ -133,6 +120,67 @@
           }
         }
       }
-    </script>
-  </body>
-</html>
+
+      function handleLikeAjax(programme_id) {
+            // Effectuer une requête AJAX pour enregistrer le clic "like"
+            $.ajax({
+                url: '/programmes/' + programme_id + '/like',
+                method: 'POST',
+                
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+
+                success: function(response) {
+                // Mettre à jour le compteur de likes du programme spécifique
+                  const likeCount = $('button.likeButton[data-programmeid="' + programme_id + '"]').siblings('.likeCount');
+                  likeCount.text(response.likeCount);
+
+                  // Récupérer le compteur de dislikes du programme spécifique
+                  const dislikeCount = $('button.likeButton[data-programmeid="' + programme_id + '"]').siblings('.dislikeCount');
+
+                  // Vérifier si le compteur de dislikes est différent de zéro
+                  if (dislikeCount.text() !== "0") {
+                      let count = parseInt(dislikeCount.text());
+                      count--;
+                      dislikeCount.text(count);
+                  }
+                  },
+                  error: function(xhr, status, error) {
+                      // Gérer l'erreur
+                  }
+              });
+      }
+
+      function handleDislikeAjax(programme_id) {
+              // Effectuer une requête AJAX pour enregistrer le clic "dislike"
+              $.ajax({
+                  url: '/programmes/' + programme_id + '/dislike',
+                  method: 'POST',
+
+                  headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+
+                  success: function(response) {
+                              // Mettre à jour le compteur de dislikes du programme spécifique
+                    const dislikeCount = $('button.dislikeButton[data-programmeid="' + programme_id + '"]').siblings('.dislikeCount');
+                    dislikeCount.text(response.dislikeCount);
+
+                    // Récupérer le compteur de likes du programme spécifique
+                    const likeCount = $('button.dislikeButton[data-programmeid="' + programme_id + '"]').siblings('.likeCount');
+
+                    // Vérifier si le compteur de likes est différent de zéro
+                    if (likeCount.text() !== "0") {
+                        let count = parseInt(likeCount.text());
+                        count--;
+                        likeCount.text(count);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Gérer l'erreur
+                }
+            });
+      }
+      </script>
+   @endsection 
