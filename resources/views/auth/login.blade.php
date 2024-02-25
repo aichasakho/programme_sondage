@@ -61,6 +61,10 @@
 
 
 
+
+
+
+
 @media (max-width: 576px) {
     .registration-form form{
         padding: 50px 20px;
@@ -90,7 +94,7 @@
             <input type="password" class="form-control item" id="password" name="password" placeholder="Mot de pass">
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-4 ">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                         {{ __('Mot de passe oublié?') }}
@@ -106,9 +110,10 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-block create-account" >Se Connecter</button>
-                <div class="flex items-center justify-end mt-4">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                <button type="submit" class="btn btn-block create-account" >Se Connecter</button><br>
+                
+                <div class="form-group">
+                    <a class="btn btn-block create-account" href="{{ route('register') }}">
                         {{ __('Pas de compte? Inscrivez-vous' ) }}
                     </a>
                 </div>
